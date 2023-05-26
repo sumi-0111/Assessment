@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelAssessment.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    [Migration("20230526114703_sumi")]
-    partial class sumi
+    [Migration("20230526121026_tyhu")]
+    partial class tyhu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace HotelAssessment.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StaffId"), 1L, 1);
 
-                    b.Property<int?>("CustomerHotelId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Entry")
@@ -47,7 +47,7 @@ namespace HotelAssessment.Migrations
                     b.Property<int>("NoOfDays")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RoomHotelId")
+                    b.Property<int?>("RoomNo")
                         .HasColumnType("int");
 
                     b.Property<string>("bookingPerson")
@@ -58,11 +58,11 @@ namespace HotelAssessment.Migrations
 
                     b.HasKey("StaffId");
 
-                    b.HasIndex("CustomerHotelId");
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("HotelId");
 
-                    b.HasIndex("RoomHotelId");
+                    b.HasIndex("RoomNo");
 
                     b.ToTable("Bookings");
                 });
@@ -111,6 +111,9 @@ namespace HotelAssessment.Migrations
                     b.Property<string>("HotelName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoomPrice")
+                        .HasColumnType("int");
+
                     b.HasKey("HotelId");
 
                     b.ToTable("Hotels");
@@ -129,9 +132,6 @@ namespace HotelAssessment.Migrations
 
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoomPrice")
-                        .HasColumnType("int");
 
                     b.Property<string>("RoomStatus")
                         .HasColumnType("nvarchar(max)");
@@ -188,17 +188,17 @@ namespace HotelAssessment.Migrations
 
             modelBuilder.Entity("HotelAssessment.Models.Booking", b =>
                 {
-                    b.HasOne("HotelAssessment.Models.Hotel", "Customer")
+                    b.HasOne("HotelAssessment.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerHotelId");
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("HotelAssessment.Models.Hotel", "Hotel")
                         .WithMany()
                         .HasForeignKey("HotelId");
 
-                    b.HasOne("HotelAssessment.Models.Hotel", "Room")
+                    b.HasOne("HotelAssessment.Models.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomHotelId");
+                        .HasForeignKey("RoomNo");
 
                     b.Navigation("Customer");
 

@@ -10,7 +10,7 @@ namespace HotelAssessment.Models
         public string? HotelDescription { get; set; }
         public string? HotelLocation { get; set; }
 
-
+        public int RoomPrice { get; set; }
 
         public string? Amenities { get; set; }
         public ICollection<Room>? Rooms { get; set; }

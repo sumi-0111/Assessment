@@ -109,6 +109,9 @@ namespace HotelAssessment.Migrations
                     b.Property<string>("HotelName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoomPrice")
+                        .HasColumnType("int");
+
                     b.HasKey("HotelId");
 
                     b.ToTable("Hotels");
@@ -127,9 +130,6 @@ namespace HotelAssessment.Migrations
 
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoomPrice")
-                        .HasColumnType("int");
 
                     b.Property<string>("RoomStatus")
                         .HasColumnType("nvarchar(max)");

@@ -4,8 +4,8 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HotelAssessment.Repositories
 {
-          public class CustomerRepository/* : ICustomer*/
-           {
+          public class CustomerRepository /*: ICustomer*/
+    {
             private readonly HotelContext customerContext;
             public CustomerRepository(HotelContext con)
             {
@@ -88,41 +88,43 @@ namespace HotelAssessment.Repositories
                 throw new Exception("An error occurred while filtering the amenties.", ex);
             }
         }
-        // Filtering price range
-        //public IEnumerable<Hotel> FilterPriceRange(decimal minPrice, decimal maxPrice)
-        //{
-        //    try
-        //    {
-        //        var Pricequery = customerContext.Hotels.Include(x => x.Rooms).AsQueryable();
-        //        if (minPrice.HasValue)
-        //        {
-        //            Pricequery = Pricequery.Where(h => h.Rooms.Any(r => r.RoomPrice >= minPrice.Value));
-        //        }
-        //        if (maxPrice.HasValue)
-        //        {
-        //            Pricequery = Pricequery.Where(h => h.Rooms.Any(r => r.RoomPrice <= maxPrice.Value));
-        //        }
+        //Filtering price range
+        public IEnumerable<Hotel> FilterPriceRange(decimal minPrice, decimal maxPrice)
+        {
+            try
+            {
+                var query = customerContext.Hotels.Include(x => x.Rooms).AsQueryable();
+                if (minPrice > 0)
+                {
+                    query = query.Where(r => r.RoomPrice >= minPrice);
+                }
+
+                if (maxPrice > 0)
+                {
+                    query = query.Where(r => r.RoomPrice <= maxPrice);
+                }
 
 
-        //        return Pricequery.ToList();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("An error occurred while filtering the price range.", ex);
-        //    }
-        //}
+
+                return query.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while filtering the price range.", ex);
+            }
+        }
         //Check room availability
-        //public int GetAvailableRoomCount(int hotel_Id)
-        //{
-        //    try
-        //    {
-        //        return customerContext.Rooms.Count(r => r.Hotel.HotelId == hotel_Id && r.Room_Status == "available");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("An error occurred while retrieving the count of available rooms.", ex);
-        //    }
-        //}
+        public int GetAvailableRoomCount(int hotel_Id)
+        {
+            try
+            {
+                return customerContext.Rooms.Count(r => r.Hotel.HotelId == hotel_Id && r.RoomStatus == "available");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving the count of available rooms.", ex);
+            }
+        }
 
 
 

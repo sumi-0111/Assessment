@@ -8,7 +8,7 @@ namespace HotelAssessment.Models
         public int RoomNo { get; set; }
         public string? RoomName { get; set; }
         public string? RoomStatus { get; set; }
-        public int RoomPrice { get; set; }
+        
         public Hotel? Hotel { get; set; }
     }
 }
