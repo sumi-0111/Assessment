@@ -49,6 +49,20 @@ namespace HotelManagement.Controllers
         {
             return cus.DeleteCustomer(CustomerId);
         }
+        [HttpGet("filter")]
+        public IEnumerable<Hotel> FilterHotels(string location)
+        {
+            return cus.FilterHotels(location);
+        }
+
+
+        [HttpGet("hotels/roomcount")]
+        public IActionResult GetAvailableRoomCountByHotelName(string hotelName)
+        {
+            int availableRoomCount = cus.GetAvailableRoomCountByHotelName(hotelName);
+            return Ok(availableRoomCount);
+        }
+
     }
 }
 

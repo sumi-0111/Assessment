@@ -8,7 +8,10 @@ namespace HotelAssessment.Repositories
             public Customer PostCustomer(Customer customer);
             public Customer PutCustomer(int CustomerId, Customer customer);
             public Customer DeleteCustomer(int CustomerId);
+            public IEnumerable<Hotel> FilterHotels(string location);
 
-        }
+
+            int GetAvailableRoomCountByHotelName(string hotelName);
     }
+}
 

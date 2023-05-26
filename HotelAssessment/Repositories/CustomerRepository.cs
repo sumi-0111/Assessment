@@ -52,5 +52,72 @@ namespace HotelAssessment.Repositories
 
                 return cus;
             }
+        public IEnumerable<Hotel> FilterHotels(HotelFilterDTO filter)
+        {
+            try
+            {
+                var hotels = customerContext.Hotels.Include(h => h.Rooms).AsQueryable();
+
+                if (!string.IsNullOrEmpty(filter.Location))
+                {
+                    hotels = hotels.Where(h => h.Location.Contains(filter.Location));
+                }
+
+                if (filter.MinPrice.HasValue)
+                {
+                    hotels = hotels.Where(h => h.Rooms.Any(r => r.RoomPrice >= filter.MinPrice.Value));
+                }
+
+                if (filter.MaxPrice.HasValue)
+                {
+                    hotels = hotels.Where(h => h.Rooms.Any(r => r.RoomPrice <= filter.MaxPrice.Value));
+                }
+
+                if (filter.Amenities != null && filter.Amenities.Any())
+                {
+                    hotels = hotels.Where(h => filter.Amenities.All(a => h.Amenities.Contains(a)));
+                }
+
+                return hotels.ToList();
+            }
+            catch (Exception ex)
+            {
+                
+                throw new Exception("An error occurred while filtering hotels.", ex);
+            }
         }
+        public IEnumerable<Hotel> FilterHotels(string location)
+        {
+            var filteredHotels = customerContext.Hotels.AsQueryable();
+
+            // Apply filters based on the provided criteria
+            if (!string.IsNullOrEmpty(location))
+            {
+                filteredHotels = filteredHotels.Where(h => h.HotelLocation.Contains(location));
+            }
+
+
+
+            return filteredHotels.ToList();
+        }
+        public int GetAvailableRoomCountByHotelName(string hotelName)
+        {
+            var hotel = customerContext.Hotels
+                .Include(h => h.Rooms)
+                .FirstOrDefault(h => h.HotelName == hotelName);
+
+            if (hotel == null)
+            {
+                // Handle hotel not found scenario
+                return 0;
+            }
+
+            int availableRoomCount = hotel.Rooms.Count(r => r.IsAvailable);
+            return availableRoomCount;
+        }
+
+
+
+
     }
+}
