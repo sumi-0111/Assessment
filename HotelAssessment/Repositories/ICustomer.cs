@@ -11,7 +11,7 @@ namespace HotelAssessment.Repositories
             public IEnumerable<Hotel> FilterHotels(string location);
 
 
-            int GetAvailableRoomCountByHotelName(string hotelName);
+        public int GettingRoom(int hotelId);
     }
 }
 

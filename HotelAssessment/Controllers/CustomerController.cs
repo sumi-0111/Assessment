@@ -57,10 +57,10 @@ namespace HotelManagement.Controllers
 
 
         [HttpGet("hotels/roomcount")]
-        public IActionResult GetAvailableRoomCountByHotelName(string hotelName)
+        public int GettingRoom(int hotelId)
         {
-            int availableRoomCount = cus.GetAvailableRoomCountByHotelName(hotelName);
-            return Ok(availableRoomCount);
+            
+            return cus.GettingRoom(hotelId) ;
         }
 
     }

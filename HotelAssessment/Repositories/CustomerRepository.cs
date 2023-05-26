@@ -4,7 +4,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HotelAssessment.Repositories
 {
-          public class CustomerRepository /*: ICustomer*/
+          public class CustomerRepository : ICustomer
     {
             private readonly HotelContext customerContext;
             public CustomerRepository(HotelContext con)
@@ -70,24 +70,7 @@ namespace HotelAssessment.Repositories
                 throw new Exception("An error occurred while filtering the location.", ex);
             }
         }
-        //Filtering amenities
-        public IEnumerable<Hotel> FilterAmenities(string amenities)
-        {
-            try
-            {
-                var amenities_query = customerContext.Hotels.Include(x => x.Rooms).AsQueryable();
-
-                if (!string.IsNullOrEmpty(amenities))
-                {
-                    amenities_query = amenities_query.Where(h => h.Amenities.Contains(amenities));
-                }
-                return amenities_query.ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while filtering the amenties.", ex);
-            }
-        }
+       
         //Filtering price range
         public IEnumerable<Hotel> FilterPriceRange(decimal minPrice, decimal maxPrice)
         {
@@ -114,7 +97,7 @@ namespace HotelAssessment.Repositories
             }
         }
         //Check room availability
-        public int GetAvailableRoomCount(int hotel_Id)
+        public int GettingRoom(int hotel_Id)
         {
             try
             {
@@ -126,7 +109,28 @@ namespace HotelAssessment.Repositories
             }
         }
 
+       
 
+       
+        public IEnumerable<Hotel> FilterHotels(string amenities)
+        {
 
+            try
+            {
+                var amenities_query = customerContext.Hotels.Include(x => x.Rooms).AsQueryable();
+
+                if (!string.IsNullOrEmpty(amenities))
+                {
+                    amenities_query = amenities_query.Where(h => h.Amenities.Contains(amenities));
+                }
+                return amenities_query.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while filtering the amenties.", ex);
+            }
+        }
+
+       
     }
 }
