@@ -15,8 +15,8 @@ namespace HotelAssessment.Models
         public DateTime Exit { get; set; }
         public Hotel? Hotel { get; set; }
 
-        public Hotel? Room { get; set; }
-        public Hotel? Customer { get; set; }
+        public Room? Room { get; set; }
+        public Customer? Customer { get; set; }
 
     }
 }

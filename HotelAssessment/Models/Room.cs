@@ -7,8 +7,8 @@ namespace HotelAssessment.Models
         [Key]
         public int RoomNo { get; set; }
         public string? RoomName { get; set; }
-        public int RoomCount { get; set; }
-        public float RoomPrice { get; set; }
+        public string? RoomStatus { get; set; }
+        public int RoomPrice { get; set; }
         public Hotel? Hotel { get; set; }
     }
 }
