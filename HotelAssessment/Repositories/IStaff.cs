@@ -9,7 +9,7 @@ namespace HotelAssessment.Repositories
             public Staff PostEmployee(Staff Staff);
             public Staff PutEmployee(int StaffId, Staff staff);
             public Staff DeleteEmployee(int StaffId);
-            public int GetRoomCountByRoomIdAndHotelId(int StaffId, int StafflId);
+  
 
         }
     }

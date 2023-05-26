@@ -11,7 +11,7 @@ using HotelAssessment.Repositories;
 
 namespace HotelManagement.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase

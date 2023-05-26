@@ -1,10 +1,12 @@
 ﻿using HotelAssessment.Models;
 using HotelAssessment.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelAssessment.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StaffController : ControllerBase
@@ -41,14 +43,7 @@ namespace HotelAssessment.Controllers
         {
             return emp.DeleteEmployee(id);
         }
-        [HttpGet("roomcount")]
-        public int GetRoomCountByRoomIdAndHotelId(int RoomId, int HotelId)
-        {
-
-            return emp.GetRoomCountByRoomIdAndHotelId(RoomId, HotelId);
-
-
-        }
+       
 
 
     }

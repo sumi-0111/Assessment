@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagement.Repositories
 {
-    public class StaffRepository /*: IStaff*/
+    public class StaffRepository : IStaff
     {
 
 
@@ -56,15 +56,7 @@ namespace HotelManagement.Repositories
 
             return emp;
         }
-        //public int GetRoomCountByRoomIdAndHotelId(int RoomId, int HotelId)
-        //{
-        //    var count = (from Room in _employeeContext.Rooms
-        //                 join hotel in _employeeContext.Hotels on Room.Hotel.HotelId equals hotel.HotelId
-        //                 where Room.RoomNo == RoomId && hotel.HotelId == HotelId
-        //                 select Room.RoomCount).FirstOrDefault();
-
-        //    return count;
-        //}
+       
 
 
 
