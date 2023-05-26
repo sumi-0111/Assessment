@@ -7,45 +7,45 @@ namespace HotelManagement.Repositories
 {
     public class HotelRepository : IHotel
     {
-        private readonly HotelContext _hotelContext;
+        private readonly HotelContext hotelContext;
         public HotelRepository(HotelContext con)
         {
-            _hotelContext = con;
+            hotelContext = con;
         }
         public IEnumerable<Hotel> GetHotel()
         {
-            return _hotelContext.Hotels.Include(x => x.Rooms).ToList();
+            return hotelContext.Hotels.Include(x => x.Rooms).ToList();
         }
         public Hotel GetHotelById(int HotelId)
         {
-            return _hotelContext.Hotels.FirstOrDefault(x => x.HotelId == HotelId);
+            return hotelContext.Hotels.FirstOrDefault(x => x.HotelId == HotelId);
         }
 
         public Hotel PostHotel(Hotel hotel)
         {
 
 
-            _hotelContext.Hotels.Add(hotel);
-            _hotelContext.SaveChanges();
+            hotelContext.Hotels.Add(hotel);
+            hotelContext.SaveChanges();
             return hotel;
         }
 
         public Hotel PutHotel(int HotelId, Hotel hotel)
         {
 
-            _hotelContext.Entry(hotel).State = EntityState.Modified;
-            _hotelContext.SaveChangesAsync();
+            hotelContext.Entry(hotel).State = EntityState.Modified;
+            hotelContext.SaveChangesAsync();
             return hotel;
         }
 
         public Hotel DeleteHotel(int HotelId)
         {
 
-            var hot = _hotelContext.Hotels.Find(HotelId);
+            var hot = hotelContext.Hotels.Find(HotelId);
 
 
-            _hotelContext.Hotels.Remove(hot);
-            _hotelContext.SaveChanges();
+            hotelContext.Hotels.Remove(hot);
+            hotelContext.SaveChanges();
 
             return hot;
         }

@@ -26,6 +26,8 @@ namespace HotelAssessment
 
             builder.Services.AddScoped<IHotel,HotelRepository>();
             builder.Services.AddScoped<IRoom, RoomRepository>();
+            builder.Services.AddScoped<IStaff,StaffRepository>();
+            builder.Services.AddScoped<ICustomer, CustomerRepository>();
 
 
 
