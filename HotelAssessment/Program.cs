@@ -1,4 +1,7 @@
+
 using HotelAssessment.Models;
+using HotelAssessment.Repositories;
+using HotelManagement.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelAssessment
@@ -16,6 +19,14 @@ namespace HotelAssessment
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<HotelContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("Connect")));
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+            builder.Services.AddScoped<IHotel,HotelRepository>();
+            builder.Services.AddScoped<IRoom, RoomRepository>();
+
 
 
             var app = builder.Build();
