@@ -9,50 +9,50 @@ namespace HotelManagement.Repositories
     {
 
 
-        private readonly HotelContext _employeeContext;
+        private readonly HotelContext _staffContext;
         public StaffRepository(HotelContext con)
         {
-            _employeeContext = con;
+            _staffContext = con;
         }
 
 
 
         public IEnumerable<Staff> GetEmployees()
         {
-            return _employeeContext.Staffs.ToList();
+            return _staffContext.Staffs.ToList();
         }
         public Staff GetEmployeesById(int EmployeeId)
         {
-            return _employeeContext.Staffs.FirstOrDefault(x => x.StaffId == EmployeeId);
+            return _staffContext.Staffs.FirstOrDefault(x => x.StaffId == EmployeeId);
         }
 
         public Staff PostEmployee(Staff employee)
         {
 
-            var emp = _employeeContext.Hotels.Find(employee.Hotel.HotelId);
+            var emp = _staffContext.Hotels.Find(employee.Hotel.HotelId);
             employee.Hotel = emp;
-            _employeeContext.Add(employee);
-            _employeeContext.SaveChanges();
+            _staffContext.Add(employee);
+            _staffContext.SaveChanges();
             return employee;
         }
 
         public Staff PutEmployee(int EmployeeId, Staff employee)
         {
-            var emp = _employeeContext.Hotels.Find(employee.Hotel.HotelId);
+            var emp = _staffContext.Hotels.Find(employee.Hotel.HotelId);
             employee.Hotel = emp;
-            _employeeContext.Entry(employee).State = EntityState.Modified;
-            _employeeContext.SaveChangesAsync();
+            _staffContext.Entry(employee).State = EntityState.Modified;
+            _staffContext.SaveChangesAsync();
             return employee;
         }
 
         public Staff DeleteEmployee(int EmployeeId)
         {
 
-            var emp = _employeeContext.Staffs.Find(EmployeeId);
+            var emp = _staffContext.Staffs.Find(EmployeeId);
 
 
-            _employeeContext.Staffs.Remove(emp);
-            _employeeContext.SaveChanges();
+            _staffContext.Staffs.Remove(emp);
+            _staffContext.SaveChanges();
 
             return emp;
         }

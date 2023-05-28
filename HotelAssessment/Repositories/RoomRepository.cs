@@ -19,9 +19,9 @@ namespace HotelManagement.Repositories
         {
             return _roomContext.Rooms.ToList();
         }
-        public Room GetRoomById(int RoomId)
+        public Room GetRoomById(int RoomNo)
         {
-            return _roomContext.Rooms.FirstOrDefault(x => x.RoomNo == RoomId);
+            return _roomContext.Rooms.FirstOrDefault(x => x.RoomNo == RoomNo);
         }
 
         public Room PostRoom(Room room)

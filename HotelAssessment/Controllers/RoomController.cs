@@ -16,7 +16,10 @@ namespace HotelManagement.Controllers
         {
             this.r = r;
         }
+
         [HttpGet]
+        [ProducesResponseType(typeof(Hotel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IEnumerable<Room> Get()
         {
             return r.GetRoom();

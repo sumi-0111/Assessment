@@ -1,4 +1,5 @@
 ﻿using HotelAssessment.Models;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -57,7 +58,7 @@ namespace HotelAssessment.Repositories
         {
             try
             {
-                var location_query = customerContext.Hotels.Include(x => x.Rooms).AsQueryable();
+                var location_query = customerContext.Hotels.AsQueryable();
 
                 if (!string.IsNullOrEmpty(location))
                 {
@@ -70,32 +71,21 @@ namespace HotelAssessment.Repositories
                 throw new Exception("An error occurred while filtering the location.", ex);
             }
         }
-       
+
         //Filtering price range
         public IEnumerable<Hotel> FilterPriceRange(decimal minPrice, decimal maxPrice)
         {
             try
             {
-                var query = customerContext.Hotels.Include(x => x.Rooms).AsQueryable();
-                if (minPrice > 0)
-                {
-                    query = query.Where(r => r.RoomPrice >= minPrice);
-                }
-
-                if (maxPrice > 0)
-                {
-                    query = query.Where(r => r.RoomPrice <= maxPrice);
-                }
-
-
-
-                return query.ToList();
+                var priceQuery = customerContext.Hotels.Include(x => x.Rooms).Where(r => r.RoomPrice >= minPrice && r.RoomPrice <= maxPrice);
+                return priceQuery.ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while filtering the price range.", ex);
+                throw new Exception("An error occurred while filtering hotels based on price range.", ex);
             }
         }
+
         //Check room availability
         public int GettingRoom(int hotel_Id)
         {
@@ -114,23 +104,20 @@ namespace HotelAssessment.Repositories
        
         public IEnumerable<Hotel> FilterHotels(string amenities)
         {
+            var filteredHotels = customerContext.Hotels.AsQueryable();
 
-            try
+            // Apply filters based on the provided criteria
+            if (!string.IsNullOrEmpty(amenities))
             {
-                var amenities_query = customerContext.Hotels.Include(x => x.Rooms).AsQueryable();
+                filteredHotels = filteredHotels.Where(h => h.HotelLocation.Contains(amenities));
+            }
 
-                if (!string.IsNullOrEmpty(amenities))
-                {
-                    amenities_query = amenities_query.Where(h => h.Amenities.Contains(amenities));
-                }
-                return amenities_query.ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while filtering the amenties.", ex);
-            }
+
+
+            return filteredHotels.ToList();
+
         }
 
-       
+
     }
 }

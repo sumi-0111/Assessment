@@ -1,11 +1,13 @@
-﻿using HotelAssessment.Models;
-using Microsoft.AspNetCore.Http;
+﻿
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel;
+using HotelAssessment.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace HotelAssessment.Controllers
 {
@@ -68,6 +70,6 @@ namespace HotelAssessment.Controllers
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.UserEmail == email && u.Password == password);
         }
-
     }
 }
+

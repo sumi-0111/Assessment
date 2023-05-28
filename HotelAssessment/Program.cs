@@ -65,10 +65,10 @@ namespace HotelAssessment
                 app.UseSwaggerUI();
             }
 
-            app.UseAuthorization();
             app.UseHttpsRedirection();
             app.UseAuthentication();
-          
+            app.UseAuthorization();
+
 
 
             app.MapControllers();

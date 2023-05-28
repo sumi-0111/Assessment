@@ -9,9 +9,8 @@ namespace HotelAssessment.Repositories
             public Customer PutCustomer(int CustomerId, Customer customer);
             public Customer DeleteCustomer(int CustomerId);
             public IEnumerable<Hotel> FilterHotels(string location);
-
-
-        public int GettingRoom(int hotelId);
+            public int GettingRoom(int hotelId);
+        public IEnumerable<Hotel> FilterPriceRange(decimal minPrice, decimal maxPrice);
     }
 }
 

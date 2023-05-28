@@ -55,8 +55,13 @@ namespace HotelManagement.Controllers
             return cus.FilterHotels(location);
         }
 
+        [HttpGet("filter/price")]
+        public IEnumerable<Hotel> FilterPriceRange(decimal minPrice, decimal maxPrice)
+        {
+            return cus.FilterPriceRange(minPrice,maxPrice);
+        }
 
-        [HttpGet("hotels/roomcount")]
+         [HttpGet("hotels/roomcount")]
         public int GettingRoom(int hotelId)
         {
             
