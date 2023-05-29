@@ -20,6 +20,7 @@ namespace HotelManagement.Repositories
         {
             return hotelContext.Hotels.FirstOrDefault(x => x.HotelId == HotelId);
         }
+       
 
         public Hotel PostHotel(Hotel hotel)
         {

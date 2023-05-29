@@ -24,9 +24,9 @@ namespace HotelAssessment.Controllers
         }
 
         [HttpGet("{id}")]
-        public Hotel GetById(int HotelId)
+        public Hotel GetById(int Id)
         {
-            return Hotelz.GetHotelById(HotelId);
+            return Hotelz.GetHotelById(Id);
         }
 
         [HttpPost]

@@ -29,9 +29,9 @@ namespace HotelManagement.Controllers
         }
 
         [HttpGet("{id}")]
-        public Customer GetById(int CustomerId)
+        public Customer GetById(int Id)
         {
-            return cus.GetCustomerById(CustomerId);
+            return cus.GetCustomerById(Id);
         }
 
         [HttpPost]

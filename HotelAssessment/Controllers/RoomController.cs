@@ -26,9 +26,9 @@ namespace HotelManagement.Controllers
         }
 
         [HttpGet("{id}")]
-        public Room GetById(int RoomId)
+        public Room GetById(int Id)
         {
-            return r.GetRoomById(RoomId);
+            return r.GetRoomById(Id);
         }
 
         [HttpPost]
