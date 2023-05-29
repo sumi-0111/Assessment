@@ -51,7 +51,6 @@ namespace HotelAssessment.Repositories
 
                 customerContext.Customers.Remove(cus);
                 customerContext.SaveChanges();
-
                 return cus;
             }
         public IEnumerable<Hotel> FilterLocation(string location)

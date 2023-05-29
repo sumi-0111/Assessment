@@ -45,9 +45,9 @@ namespace HotelManagement.Controllers
             return cus.PutCustomer(CustomerId, customer);
         }
         [HttpDelete("{id}")]
-        public Customer DeleteCustomer(int CustomerId)
+        public Customer DeleteCustomer(int Id)
         {
-            return cus.DeleteCustomer(CustomerId);
+            return cus.DeleteCustomer(Id);
         }
         [HttpGet("filter")]
         public IEnumerable<Hotel> FilterHotels(string location)
